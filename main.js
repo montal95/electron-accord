@@ -7,7 +7,11 @@ const createWindow = () => {
     height: 800,
     backgroundColor: "white",
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
+      //will sanitize JS code
+      worldSafeExecuteJavaScript: true,
+      //ensures both preload and electron internal logic run in seperate context
+      contextIsolation: true,
     },
   });
 
