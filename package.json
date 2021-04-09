@@ -1,0 +1,23 @@
+{
+  "name": "electron-accord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montal95/electron-accord.git"
+  },
+  "author": "Samuel Montalvo Jr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/montal95/electron-accord/issues"
+  },
+  "homepage": "https://github.com/montal95/electron-accord#readme",
+  "devDependencies": {
+    "electron": "^12.0.2"
+  }
+}
