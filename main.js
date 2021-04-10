@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain, Notification } = require("electron");
 const path = require("path");
 const isDev = !app.isPackaged;
 
@@ -10,10 +10,9 @@ const createWindow = () => {
     backgroundColor: "white",
     webPreferences: {
       nodeIntegration: false,
-      //will sanitize JS code
       worldSafeExecuteJavaScript: true,
-      //ensures both preload and electron internal logic run in seperate context
       contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
     },
   });
 
@@ -30,6 +29,14 @@ if (isDev) {
 }
 
 app.whenReady().then(createWindow);
+
+ipcMain.on("notify", (_, message) => {
+  new Notification({ title: "Notification", body: message }).show();
+});
+
+ipcMain.on("app-quit", () => {
+  app.quit();
+});
 
 app.on("window-all-closed", () => {
   //Closes app when you close windows on non-mac OS
