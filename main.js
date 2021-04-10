@@ -36,3 +36,6 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+//Webpack -> bundler for JS files
+//Babel -> Compiles JS into JS compatible with all browsers
