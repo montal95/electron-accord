@@ -2,17 +2,22 @@ import React, { useEffect } from "react";
 
 import { AvailableChatsList, JoinedChatsList } from "../components";
 import ViewTitle from "../components/shared/ViewTitle";
+import { useDispatch, useSelector } from "react-redux";
 
-import { fetchChats } from "../api/chats";
+import { fetchChats } from "../actions/chats";
 
 export const Home = () => {
+  const dispatch = useDispatch();
+  const chats = useSelector(({ chats }) => chats.items);
+
   useEffect(() => {
-    fetchChats().then(chats => console.log(chats));
-  }, []);
+    dispatch(fetchChats());
+  }, [dispatch]);
 
   return (
     <div className="row no-gutters fh">
       <div className="col-3 fh">
+        {JSON.stringify(chats)}
         <JoinedChatsList />
       </div>
       <div className="col-9 fh">
