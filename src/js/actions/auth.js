@@ -9,12 +9,9 @@ export const registerUser = (formData) => (dispatch) => {
 export const listenToAuthChanges = () => (dispatch) => {
   dispatch({ type: "AUTH_ON_INIT" });
   api.onAuthStateChange((authUser) => {
-    if (authUser) {
-      dispatch({ type: "AUTH_ON_SUCCESS" });
-      console.log("we are authenticated");
-    } else {
-      dispatch({ type: "AUTH_ON_ERROR" });
-      console.log("we are NOT authenticated");
-    }
+    const dispatchObj = authUser
+      ? { type: "AUTH_ON_SUCCESS", user: authUser }
+      : { type: "AUTH_ON_ERROR" };
+    dispatch(dispatchObj);
   });
 };
