@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Chat, Home, Welcome, Settings } from "./views";
 import { Navbar } from "./components";
 
@@ -6,10 +6,15 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import configureStore from "./store/index";
+import { listenToAuthChanges } from "./actions/auth";
 
 const store = configureStore();
 
 const App = () => {
+  useEffect(() => {
+    store.dispatch(listenToAuthChanges());
+  }, []);
+
   return (
     <Provider store={store}>
       <Router>

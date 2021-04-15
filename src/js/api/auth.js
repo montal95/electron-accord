@@ -10,7 +10,7 @@ export const register = async ({ email, password, username, avatar }) => {
     const { user } = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
-      
+
     await createUserProfile({
       uid: user.uid,
       username,
@@ -24,4 +24,8 @@ export const register = async ({ email, password, username, avatar }) => {
   } catch (error) {
     return Promise.reject(error.message);
   }
+};
+
+export const onAuthStateChange = (onAuth) => {
+  firebase.auth().onAuthStateChanged(onAuth);
 };
