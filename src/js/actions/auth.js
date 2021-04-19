@@ -6,6 +6,10 @@ export const registerUser = (formData) => (dispatch) => {
     .then((_) => dispatch({ type: "AUTH_REGISTER_SUCCESS" }));
 };
 
+export const loginUser = (formData) => (dispatch) => {
+  api.login(formData).then((_) => dispatch({ type: "AUTH_LOGIN_SUCCESS" }));
+};
+
 export const logout = () => (dispatch) =>
   api.logout().then((_) => dispatch({ type: "AUTH_LOGOUT_SUCCESS" }));
 
