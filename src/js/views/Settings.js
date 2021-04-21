@@ -1,6 +1,6 @@
 import React from "react";
 
-import BaseLayout from "../layouts/Base";
+import { BaseLayout } from "../layouts/Base";
 
 export const Settings = () => {
   return (

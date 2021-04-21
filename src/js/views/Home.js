@@ -5,7 +5,7 @@ import ViewTitle from "../components/shared/ViewTitle";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchChats } from "../actions/chats";
-import BaseLayout from "../layouts/Base";
+import { BaseLayout } from "../layouts/Base";
 
 export const Home = () => {
   const dispatch = useDispatch();

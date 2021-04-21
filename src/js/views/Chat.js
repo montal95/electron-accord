@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import BaseLayout from "../layouts/Base";
+import { BaseLayout } from "../layouts/Base";
 import { ChatMessagesList, ChatUsersList } from "../components";
 import ViewTitle from "../components/shared/ViewTitle";
 
