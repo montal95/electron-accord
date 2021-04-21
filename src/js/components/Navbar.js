@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { logout } from "../actions/auth";
 import { BackButton } from "./shared/BackButton";
 
-export const Navbar = ({ canGoBack }) => {
+export const Navbar = ({ canGoBack, isSettings = false }) => {
   const dispatch = useDispatch();
   const user = useSelector(({ auth }) => auth.user);
 
@@ -13,9 +13,11 @@ export const Navbar = ({ canGoBack }) => {
       <nav className="chat-navbar-inner">
         <div className="chat-navbar-inner-left">
           {canGoBack && <BackButton />}
-          <Link to="/settings" className="btn btn-outline-success ml-2">
-            Settings
-          </Link>
+          {!isSettings && (
+            <Link to="/settings" className="btn btn-outline-success ml-2">
+              Settings
+            </Link>
+          )}
         </div>
         <div className="chat-navbar-inner-right">
           {user ? (
