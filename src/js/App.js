@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { listenToAuthChanges } from "./actions/auth";
+import { listenToConnectionChanges } from "./actions/app";
 import StoreProvider from "./store/StoreProvider";
 import { LoadingView } from "./components/shared/LoadingView";
 
@@ -38,21 +39,18 @@ const AuthRoute = ({ children, ...rest }) => {
 const ChatApp = () => {
   const dispatch = useDispatch();
   const isChecking = useSelector(({ auth }) => auth.isChecking);
-
-  const alertOnlineStatus = () => {
-    window.alert(navigator.onLine ? "online" : "offline");
-  };
+  const isOnline = useSelector(({ app }) => app.isOnline);
 
   useEffect(() => {
     const unsubFromAuth = dispatch(listenToAuthChanges());
-    window.addEventListener("online", alertOnlineStatus);
-    window.addEventListener("offline", alertOnlineStatus);
+    const unsubFromConnectionChanges = dispatch(listenToConnectionChanges());
     return () => {
       unsubFromAuth();
-      window.removeEventListener("online", alertOnlineStatus);
-      window.removeEventListener("offline", alertOnlineStatus);
+      unsubFromConnectionChanges();
     };
   }, [dispatch]);
+
+  if(!isOnline) return <LoadingView message="Application has been disconnected from the internet. Please reconnect..." />
 
   return isChecking ? (
     <LoadingView />
