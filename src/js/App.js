@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Chat, Home, Welcome, Settings } from "./views";
-import { Navbar } from "./components";
 
 import {
   HashRouter as Router,
@@ -49,7 +48,6 @@ const ChatApp = () => {
   ) : (
     <Router>
       <ContentWrapper>
-        <Navbar />
         <Switch>
           <Route exact path="/">
             <Welcome />
