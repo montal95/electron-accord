@@ -11,30 +11,32 @@ export const getUserProfile = (uid) =>
     .doc(uid)
     .get()
     .then((snapshot) => snapshot.data());
-    
+
 export const register = async ({ email, password, username, avatar }) => {
-  try {
-    const { user } = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
+  const { user } = await firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password);
 
-    await createUserProfile({
-      uid: user.uid,
-      username,
-      password,
-      avatar,
-      email,
-      joinedChats: [],
-    });
+  const userProfile = {
+    uid: user.uid,
+    username,
+    password,
+    avatar,
+    email,
+    joinedChats: [],
+  };
 
-    return user;
-  } catch (error) {
-    return Promise.reject(error.message);
-  }
+  await createUserProfile(userProfile);
+  return userProfile;
 };
 
-export const login = ({ email, password }) =>
-  firebase.auth().signInWithEmailAndPassword(email, password);
+export const login = async ({ email, password }) => {
+  const { user } = await firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password);
+  const userProfile = await getUserProfile(user.uid);
+  return userProfile;
+};
 
 export const logout = () => firebase.auth().signOut();
 
